@@ -1,6 +1,11 @@
 import React from "react";
 import img from "../assets/avatar.png";
 import { Link } from "react-router-dom";
+import { HiUserGroup } from "react-icons/hi";
+import { BiLinkExternal } from "react-icons/bi";
+import { IoLogoYoutube } from "react-icons/io";
+import { BsFacebook } from "react-icons/bs";
+
 const Nav = () => {
   return (
     <div className="navbar bg-base-100 z-10 flex justify-between shadow sticky top-0">
@@ -27,9 +32,30 @@ const Nav = () => {
         </label>
       </div>
       <div className="flex-1 hidden lg:flex justify-evenly ">
-        <Link to="/">Join Our Facebook Page</Link>
-        <Link to="/">Join Our Facebook Page</Link>
-        <Link to="/">Join Our Facebook Page</Link>
+        <Link
+          to="/"
+          className="flex items-center text-blue-500 gap-4 font-medium hover:translate-x-2 duration-300"
+        >
+          {" "}
+          <HiUserGroup /> Join Our Facebook Page
+          <BiLinkExternal className="animate-pulse" />
+        </Link>
+        <Link
+          to="/"
+          className=" flex items-center text-red-500 gap-4 font-medium hover:translate-x-2 duration-300"
+        >
+          {" "}
+          <IoLogoYoutube /> Subscribe Youtube Channel
+          <BiLinkExternal className="animate-pulse" />
+        </Link>
+        <Link
+          to="/"
+          className="flex items-center text-blue-500 gap-4 font-medium hover:translate-x-2 duration-300"
+        >
+          {" "}
+          <BsFacebook /> Follow us on Facebook
+          <BiLinkExternal className="animate-pulse" />
+        </Link>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">

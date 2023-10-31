@@ -12,7 +12,7 @@ const DashboardLayout = () => {
           <Nav></Nav>
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side shadow-lg top-[67px]">
+        <div className="drawer-side shadow-lg top-[67px] lg:top-0">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
           <ul className="menu p-4 w-80 min-h-full bg-base-100 text-base-content">

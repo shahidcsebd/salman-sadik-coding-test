@@ -1,80 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Button from "../components/Button";
 import InputBox from "../components/InputBox";
 import OutlineCard from "../components/OutlineCard";
-const DATA = [
-  {
-    id: "0e2f0db1-5457-46b0-949e-8032d2f9997a",
-    h2: "Mastering React Components",
-    h3: [
-      {
-        id: "26fd50b3-3841-496e-8b32-73636FCDf6f4197",
-        name: "Creating and rendering components",
-      },
-      {
-        id: "b0ee9d50-d0a6-46f8-96e3-7f3f0fERWE9a2525",
-        name: "Component Lifecycle and Hooks",
-      },
-      {
-        id: "b0eesdfs50-d0a6-46f8-96e3-7f3f0DSAFCf9a2525",
-        name: "Managing State and Props",
-      },
-    ],
-    tint: 1,
-  },
-  {
-    id: "487f68b4-1746-438c-920e-d67b7df4DSAC6247",
-    h2: "Understanding the basics",
-    h3: [
-      {
-        id: "95ee6a5d-f927-4579-8c15-2b4ebDSAD86210ae",
-        name: "Managing Data Flow with Redux",
-      },
-      {
-        id: "5bee94eb-6bde-4411-b438-1c37faSDSAC6af364",
-        name: "Key concepts of react components",
-      },
-      {
-        id: "5bee94eb-6bde-4411-b438-1c37fa6DSDFAaf364",
-        name: "Fetching and updating data with APIs",
-      },
-      {
-        id: "5bee94eb-6bde-4411-b438-1c37fasDSAa6af364",
-        name: "The fundamental of reactjs",
-      },
-    ],
-    tint: 2,
-  },
+import Loading from "../Shared/Loading";
 
-  {
-    id: "487fds68b4-1746-438c-920e-d67b7df4dsd6247",
-    h2: "NPM and Webpack",
-    h3: [
-      {
-        id: "95ee6dsa5d-f927-4579-8c15-2b4eb86210dsae",
-        name: "Install React using NPM",
-      },
-      {
-        id: "5beswe94eb-6bde-4411-b438-1cds37fa6af364",
-        name: "Understanding webpack and NPM",
-      },
-      {
-        id: "5bedwde94eb-6bde-4411-b438-1c37fdsda6af364",
-        name: "Build and transpile jsx using webpack Babel",
-      },
-      {
-        id: "5beesds94eb-6bde-4411-b438-1c37fdsa6af364",
-        name: "Rendering the jsx component on DOM Node",
-      },
-    ],
-    tint: 3,
-  },
-];
 const OutlineEditor = () => {
-  const [outlines, setOutlines] = useState(DATA);
+  const [outlines, setOutlines] = useState([]);
   const [h2InputBox, seth2InputBox] = useState(false);
   const [input, setInput] = useState("");
+  console.log(JSON.stringify(outlines));
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch("DATA.json");
+      const res = await data.json();
+      setOutlines(res);
+    };
+    fetchData();
+  }, []);
+  if (!outlines.length > 0) {
+    return <Loading />;
+  }
   const handleDragAndDrop = (results) => {
     const { source, destination, type } = results;
 
