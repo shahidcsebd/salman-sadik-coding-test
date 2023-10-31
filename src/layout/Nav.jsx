@@ -3,8 +3,8 @@ import img from "../assets/avatar.png";
 import { Link } from "react-router-dom";
 const Nav = () => {
   return (
-    <div className="navbar bg-base-100 flex justify-between">
-      <div className="flex-1">
+    <div className="navbar bg-base-100 flex justify-between shadow">
+      <div className="">
         <label
           tabIndex="0"
           htmlFor="my-drawer-2"
@@ -26,10 +26,10 @@ const Nav = () => {
           </svg>
         </label>
       </div>
-      <div className="flex-1">
-        <div className="flex">
-          {/* <Link to="/">Join Our Facebook Page</Link> */}
-        </div>
+      <div className="flex-1 hidden lg:flex justify-evenly ">
+        <Link to="/">Join Our Facebook Page</Link>
+        <Link to="/">Join Our Facebook Page</Link>
+        <Link to="/">Join Our Facebook Page</Link>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">

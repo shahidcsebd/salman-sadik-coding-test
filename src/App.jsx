@@ -1,10 +1,13 @@
-import DashboardLayout from "./layout/DashboardLayout";
+import { RouterProvider } from "react-router-dom";
 import Main from "./layout/Main";
+import routes from "./routes/routes";
 
 function App() {
   return (
     <div>
-      <Main />
+      <RouterProvider router={routes}>
+        <Main />
+      </RouterProvider>
     </div>
   );
 }
