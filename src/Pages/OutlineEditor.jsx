@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { DragDropContext, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Button from "../components/Button";
+import InputBox from "../components/InputBox";
+import OutlineCard from "../components/OutlineCard";
 const DATA = [
   {
     id: "0e2f0db1-5457-46b0-949e-8032d2f9997a",
@@ -98,10 +101,10 @@ const OutlineEditor = () => {
     const itemDestinationIndex = destination.index;
 
     const outlineSourceIndex = outlines.findIndex(
-      (store) => store.id === source.droppableId
+      (outline) => outline.id === source.droppableId
     );
     const outlineDestinatonIndex = outlines.findIndex(
-      (store) => store.id === destination.droppableId
+      (outline) => outline.id === destination.droppableId
     );
 
     const newSourceItems = [...outlines[outlineSourceIndex].h3];
@@ -143,13 +146,14 @@ const OutlineEditor = () => {
     seth2InputBox((prev) => !prev);
   };
   return (
-    <div className="layout__wrapper">
-      <div className="card">
+    <div className="max-w-full md:py-10 px-6">
+      <div className="shadow-lg w-full mx-auto p-10 rounded-md flex flex-col gap-3 max-w-3xl md:justify-between justify-center bg-white">
         <DragDropContext onDragEnd={handleDragAndDrop}>
           <div className="header">
-            <h1 className="text-left text-4xl font-semibold">
+            <h1 className="text-left text-2xl font-bold">
               {" "}
-              ✍️ Outlines Editor
+              <span className="bg-yellow-100 p-1 rounded">✍️</span> Outlines
+              Editor
             </h1>
             {!h2InputBox && (
               <div className="flex my-4">
@@ -157,7 +161,7 @@ const OutlineEditor = () => {
               </div>
             )}
             {h2InputBox && (
-              <div class=" pb-5 flex my-4">
+              <div className="pb-5 flex w-full my-4">
                 <InputBox
                   onInputKeyUp={handleH2}
                   setInput={setInput}
@@ -167,23 +171,24 @@ const OutlineEditor = () => {
               </div>
             )}
           </div>
-          <Droppable droppableId="ROOT" type="group">
+          <Droppable droppableId="ROOT" type="group" className="w-full">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {outlines?.map((store, index) => (
+                {outlines?.map((outline, index) => (
                   <Draggable
-                    draggableId={store.id}
+                    draggableId={outline.id}
                     index={index}
-                    key={store.id}
+                    key={outline.id}
                   >
                     {(provided) => (
                       <div
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
+                        className="w-full bg-white border p-2 my-4 rounded-md group "
                       >
-                        <MainHeading
-                          {...store}
+                        <OutlineCard
+                          {...outline}
                           onSetOutlines={setOutlines}
                           onOutlines={outlines}
                         />

@@ -32,7 +32,7 @@ const DashboardLayout = () => {
                 </span>
               </Link>
               <NavLink
-                to="/"
+                to="/outline"
                 className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
@@ -41,7 +41,7 @@ const DashboardLayout = () => {
                     : ""
                 }
               >
-                Messages
+                Outline
               </NavLink>
             </li>
           </ul>
