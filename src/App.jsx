@@ -4,11 +4,11 @@ import routes from "./routes/routes";
 
 function App() {
   return (
-    <div>
+    <>
       <RouterProvider router={routes}>
         <Main />
       </RouterProvider>
-    </div>
+    </>
   );
 }
 
