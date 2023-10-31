@@ -48,7 +48,7 @@ const AiAssistWriter = () => {
             type="checkbox"
             name="RealTimeData"
             id="RealTimeData"
-            className="toggle toggle-info toggle-md"
+            className="toggle toggle-primary toggle-md"
             {...register("RealTimeData")}
           />
           <label
@@ -57,7 +57,7 @@ const AiAssistWriter = () => {
           >
             Real Time Data
           </label>
-          <div className="bg-white text-xs delay-300 animate-bounce  text-green-500 border-green-500 border font-semibold z-0  px-1 shadow-sm py-[1px] rounded-sm">
+          <div className="bg-white text-xs  delay-300 animate-bounce  text-green-500 border-green-500 border font-semibold z-auto px-1 shadow-sm py-[1px] rounded-sm">
             New
           </div>
         </div>
@@ -88,7 +88,7 @@ const AiAssistWriter = () => {
           <input
             type="checkbox"
             name="aiGeneratedTitle"
-            className="toggle toggle-info toggle-md"
+            className="toggle toggle-primary toggle-md"
             {...register("aiGeneratedTitle")}
             id="aiGeneratedTitle"
           />
@@ -154,24 +154,76 @@ const AiAssistWriter = () => {
             ))}
           </select>
         </div>
-        {/* <div className="flex items-center gap-3 w-full mt-2">
+        <div className="flex items-center gap-3 w-full mt-2">
           <input
             type="checkbox"
-            name="aiGeneratedTitle"
-            className="toggle toggle-info toggle-md"
-            {...register("aiGeneratedTitle")}
-            id="aiGeneratedTitle"
+            name="includeFAQ"
+            className="toggle toggle-primary toggle-md"
+            {...register("includeFAQ")}
+            id="includeFAQ"
+            checked
           />
           <label
             className="font-normal text-lg hover:cursor-pointer"
-            htmlFor="aiGeneratedTitle"
+            htmlFor="includeFAQ"
           >
-            Ai Generated Title
+            Include FAQ Schema
           </label>
-        </div> */}
-        <div className="flex w-full max-w-xs md:max-w-md justify-between items-center w-full">
-          <button className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-sky-800 hover:bg-sky-600 active:bg-sky-700 duration-150 rounded-lg md:inline-flex">
-            Update
+        </div>
+        <div className="flex flex-col gap-3 mt-2 w-full">
+          <Label>Number of FAQ&apos;s</Label>
+          <div className="flex gap-5 items-center">
+            <input
+              type="radio"
+              name="imageSource"
+              id="noImage"
+              value="noImage"
+              className="radio radio-primary"
+              {...register("imageSource")}
+            />
+            <label
+              className="font-normal text-md hover:cursor-pointer"
+              htmlFor="noImage"
+            >
+              Don&apos;t Use Image
+            </label>
+          </div>
+          <div className="flex gap-5 items-center">
+            <input
+              type="radio"
+              name="imageSource"
+              id="pixabay"
+              value="pixabay"
+              className="radio radio-primary"
+              {...register("imageSource")}
+            />
+            <label
+              className="font-normal text-md hover:cursor-pointer"
+              htmlFor="pixabay"
+            >
+              Use Pixabay Image
+            </label>
+          </div>
+          <div className="flex gap-5 items-center">
+            <input
+              type="radio"
+              name="imageSource"
+              id="googleImage"
+              value="googleImage"
+              className="radio radio-primary"
+              {...register("imageSource")}
+            />
+            <label
+              className="font-normal text-md hover:cursor-pointer"
+              htmlFor="googleImage"
+            >
+              Use Google Image
+            </label>
+          </div>
+        </div>
+        <div className="flex w-full justify-between items-center mt-6">
+          <button className="btn btn-lg w-full btn-primary normal-case text-white text-lg">
+            Create Article Outline
           </button>
         </div>
       </form>

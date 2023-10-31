@@ -3,7 +3,7 @@ import img from "../assets/avatar.png";
 import { Link } from "react-router-dom";
 const Nav = () => {
   return (
-    <div className="navbar bg-base-100 flex justify-between shadow">
+    <div className="navbar bg-base-100 z-10 flex justify-between shadow sticky top-0">
       <div className="">
         <label
           tabIndex="0"
