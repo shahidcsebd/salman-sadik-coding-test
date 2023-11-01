@@ -180,6 +180,7 @@ const AiAssistWriter = () => {
               value="noImage"
               className="radio radio-primary"
               {...register("imageSource")}
+              checked
             />
             <label
               className="font-normal text-md hover:cursor-pointer"

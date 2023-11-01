@@ -1,8 +1,8 @@
 [
   {
     "id": "0e2f0db1-5457-46b0-949e-8032d2f9997a",
-    "h2": "Mastering React Components",
-    "h3": [
+    "heading": "Mastering React Components",
+    "subHeading": [
       {
         "id": "26fd50b3-3841-496e-8b32-73636FCDf6f4197",
         "name": "Creating and rendering components"
@@ -20,8 +20,8 @@
   },
   {
     "id": "487f68b4-1746-438c-920e-d67b7df4DSAC6247",
-    "h2": "Understanding the basics",
-    "h3": [
+    "heading": "Understanding the basics",
+    "subHeading": [
       {
         "id": "95ee6a5d-f927-4579-8c15-2b4ebDSAD86210ae",
         "name": "Managing Data Flow with Redux"
@@ -43,8 +43,8 @@
   },
   {
     "id": "487fds68b4-1746-438c-920e-d67b7df4dsd6247",
-    "h2": "NPM and Webpack",
-    "h3": [
+    "heading": "NPM and Webpack",
+    "subHeading": [
       {
         "id": "95ee6dsa5d-f927-4579-8c15-2b4eb86210dsae",
         "name": "Install React using NPM"

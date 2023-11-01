@@ -11,12 +11,14 @@ const OutlineEditor = () => {
   const [input, setInput] = useState("");
   console.log(JSON.stringify(outlines));
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch("DATA.json");
-      const res = await data.json();
-      setOutlines(res);
-    };
-    fetchData();
+    setTimeout(() => {
+      const fetchData = async () => {
+        const data = await fetch("DATA.json");
+        const res = await data.json();
+        setOutlines(res);
+      };
+      fetchData();
+    }, 1000);
   }, []);
   if (!outlines.length > 0) {
     return <Loading />;
@@ -36,10 +38,10 @@ const OutlineEditor = () => {
       const reorderedOutlines = [...outlines];
 
       const outlineSourceIndex = source.index;
-      const outlineDestinatonIndex = destination.index;
+      const outlineDestinationIndex = destination.index;
 
       const [removedOutline] = reorderedOutlines.splice(outlineSourceIndex, 1);
-      reorderedOutlines.splice(outlineDestinatonIndex, 0, removedOutline);
+      reorderedOutlines.splice(outlineDestinationIndex, 0, removedOutline);
 
       return setOutlines(reorderedOutlines);
     }
@@ -49,14 +51,14 @@ const OutlineEditor = () => {
     const outlineSourceIndex = outlines.findIndex(
       (outline) => outline.id === source.droppableId
     );
-    const outlineDestinatonIndex = outlines.findIndex(
+    const outlineDestinationIndex = outlines.findIndex(
       (outline) => outline.id === destination.droppableId
     );
 
-    const newSourceItems = [...outlines[outlineSourceIndex].h3];
+    const newSourceItems = [...outlines[outlineSourceIndex].subHeading];
     const newDestinationItems =
       source.droppableId !== destination.droppableId
-        ? [...outlines[outlineDestinatonIndex].h3]
+        ? [...outlines[outlineDestinationIndex].subHeading]
         : newSourceItems;
 
     const [deletedItem] = newSourceItems.splice(itemSourceIndex, 1);
@@ -66,11 +68,11 @@ const OutlineEditor = () => {
 
     newOutlines[outlineSourceIndex] = {
       ...outlines[outlineSourceIndex],
-      h3: newSourceItems,
+      subHeading: newSourceItems,
     };
-    newOutlines[outlineDestinatonIndex] = {
-      ...outlines[outlineDestinatonIndex],
-      h3: newDestinationItems,
+    newOutlines[outlineDestinationIndex] = {
+      ...outlines[outlineDestinationIndex],
+      subHeading: newDestinationItems,
     };
 
     setOutlines(newOutlines);
