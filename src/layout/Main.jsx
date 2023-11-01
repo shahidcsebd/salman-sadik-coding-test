@@ -1,21 +1,37 @@
 import React from "react";
 import DashboardLayout from "./DashboardLayout";
-import Nav from "./Nav";
-import { Outlet } from "react-router-dom";
+
+import { Toaster } from "react-hot-toast";
 
 const Main = () => {
   return (
-    // <div className="">
-    //   <div className="">
-    //     <DashboardLayout />
-    //   </div>
-    //   {/* <div className="flex-1 flex flex-col h-screen">
-    //     <Nav></Nav>
-
-    //   </div> */}
-    // </div>
     <>
       <DashboardLayout />
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </>
   );
 };

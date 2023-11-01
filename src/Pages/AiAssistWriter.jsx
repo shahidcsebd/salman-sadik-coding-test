@@ -6,6 +6,7 @@ import Label from "../components/Label";
 import Option from "../components/Option";
 import { useNavigate } from "react-router-dom";
 import InputRadio from "../components/InputRadio";
+import toast from "react-hot-toast";
 
 const AiAssistWriter = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const AiAssistWriter = () => {
   const submit = (data) => {
     console.log(data);
     if (data) {
+      toast.success("Data Loaded Successfully!");
       navigate("/outline");
     }
   };
