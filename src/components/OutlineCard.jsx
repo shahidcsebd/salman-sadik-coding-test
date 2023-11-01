@@ -12,9 +12,11 @@ const OutlineCard = ({
   id,
   onSetOutlines,
   onOutlines,
+  setKeywordHover,
 }) => {
   const [h3InputBox, seth3InputBox] = useState(false);
   const [keywordBox, setKeywordBox] = useState(false);
+
   const [input, setInput] = useState("");
 
   const handleH3 = (e) => {
@@ -75,16 +77,13 @@ const OutlineCard = ({
           ref={provided.innerRef}
           className={`mb-4`}
         >
-          <div className="rounded-md border group-hover:border-blue-400 duration-1000">
-            <h3 className="py-4 flex justify-between items-center gap-2  text-xl text-left pl-2">
+          <div className="rounded-md border hover:border-blue-400 duration-1000">
+            <h3 className="py-4 flex  justify-between items-center gap-2  text-xl text-left pl-2">
               <span className="flex items-center gap-2">
                 <RiDraggable /> <span className="font-bold">H2:</span>{" "}
                 <span contentEditable>{heading}</span>
               </span>
-              <button
-                onClick={() => handleDeleteH2(id)}
-                className="hidden group-hover:block"
-              >
+              <button onClick={() => handleDeleteH2(id)}>
                 <TiDelete className="mr-4 text-2xl" />
               </button>
             </h3>
@@ -107,7 +106,7 @@ const OutlineCard = ({
                         : "bg-white"
                     }`}
                   >
-                    <h4 className="group text-md group-hover:border-blue-400 text-left pl-4 py-4 flex justify-between s items-center gap-2 border rounded-md">
+                    <h4 className=" text-md hover:border-blue-400 text-left pl-4 py-4 flex justify-between s items-center gap-2 border rounded-md">
                       <span className="flex items-center gap-2">
                         {" "}
                         <RiDraggable /> <span className="font-medium">
@@ -117,10 +116,7 @@ const OutlineCard = ({
                           {item.name}
                         </span>
                       </span>
-                      <button
-                        onClick={() => handleDeleteH3(item.id)}
-                        className="hidden duration-1000 transition-all group-hover:block"
-                      >
+                      <button onClick={() => handleDeleteH3(item.id)}>
                         <TiDelete className="mr-4 text-2xl" />
                       </button>
                     </h4>
@@ -134,10 +130,14 @@ const OutlineCard = ({
           <div>
             <div className="flex mt-4 pl-12 gap-8 ">
               <Button onHandleClick={handleAddH3} text="   + New H3 Heading" />
-              <Button
-                onHandleClick={handleAddKeyword}
-                text="  + Insert NLP & LSI Keywords"
-              />
+              <button
+                className="inline-flex items-center px-4 py-2 bg-base-200 hover:bg-gray-300 text-gray-700 text-sm font-normal rounded-md"
+                onClick={handleAddKeyword}
+                onMouseOver={() => setKeywordHover(true)}
+                onMouseLeave={() => setKeywordHover(false)}
+              >
+                + Insert NLP & LSI Keywords
+              </button>
             </div>
 
             {keywordBox && <Keywords />}

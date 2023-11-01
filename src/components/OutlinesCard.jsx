@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import OutlineCard from "./OutlineCard";
 
@@ -10,6 +10,8 @@ const OutlinesCard = ({
   onOutlines,
   onSetOutlines,
 }) => {
+  const [keywordHover, setKeywordHover] = useState(false);
+
   return (
     <Draggable draggableId={draggableId} index={index} key={key}>
       {(provided, snapshot) => (
@@ -18,13 +20,19 @@ const OutlinesCard = ({
           {...provided.draggableProps}
           ref={provided.innerRef}
           className={`w-full bg-white border p-2 my-4 rounded-md group ${
-            snapshot.isDragging ? `border-blue-200 border-4` : ""
+            keywordHover
+              ? `border-indigo-600`
+              : snapshot.isDragging
+              ? "border-indigo-600"
+              : ""
           }`}
         >
           <OutlineCard
             {...outline}
             onSetOutlines={onSetOutlines}
             onOutlines={onOutlines}
+            keywordHover={keywordHover}
+            setKeywordHover={setKeywordHover}
           />
         </div>
       )}
