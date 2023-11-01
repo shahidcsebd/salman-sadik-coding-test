@@ -27,13 +27,13 @@ const OutlineCard = ({
       if (input == "") return;
       let findOutline = onOutlines.find((ele) => ele.id == id);
 
-      if (findOutline?.h3?.length > 0) {
-        let h3 = [...findOutline.h3, data];
-        findOutline = { ...findOutline, h3 };
+      if (findOutline?.subHeading?.length > 0) {
+        let subHeading = [...findOutline.subHeading, data];
+        findOutline = { ...findOutline, subHeading };
       }
 
-      if (!findOutline?.h3?.length) {
-        findOutline = { ...findOutline, h3: [data] };
+      if (!findOutline?.subHeading?.length) {
+        findOutline = { ...findOutline, subHeading: [data] };
       }
 
       let filteredOutline = onOutlines.filter((ele) => ele.id != id);
@@ -69,11 +69,11 @@ const OutlineCard = ({
   };
   return (
     <Droppable droppableId={id}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className="mb-4 "
+          className={`mb-4 ${snapshot.isDragging ? `bg-blue-200` : ``}`}
         >
           <div className="rounded-md border group-hover:border-blue-400 duration-1000">
             <h3 className="py-4 flex justify-between items-center gap-2  text-xl text-left pl-2">
@@ -92,12 +92,14 @@ const OutlineCard = ({
           <div>
             {subHeading?.map((item, index) => (
               <Draggable draggableId={item.id} index={index} key={item.id}>
-                {(provided) => (
+                {(provided, snapshot) => (
                   <div
                     {...provided.dragHandleProps}
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    className="my-2 ml-4 bg-white"
+                    className={`my-2 ml-4 bg-white ${
+                      snapshot.isDragging ? `bg-blue-200 rounded-md` : ""
+                    }`}
                   >
                     <h4 className="group text-md group-hover:border-blue-400 text-left pl-4 py-4 flex justify-between s items-center gap-2 border rounded-md">
                       <span className="flex items-center gap-2">
@@ -105,11 +107,13 @@ const OutlineCard = ({
                         <RiDraggable /> <span className="font-medium">
                           H3:
                         </span>{" "}
-                        <span contentEditable>{item.name}</span>
+                        <span contentEditable className="border-0">
+                          {item.name}
+                        </span>
                       </span>
                       <button
                         onClick={() => handleDeleteH3(item.id)}
-                        className="hidden group-hover:block"
+                        className="hidden duration-1000 transition-all group-hover:block"
                       >
                         <TiDelete className="mr-4 text-2xl" />
                       </button>

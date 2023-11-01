@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Button from "../components/Button";
 import InputBox from "../components/InputBox";
-import OutlineCard from "../components/OutlineCard";
 import Loading from "../Shared/Loading";
+import OutlinesCard from "../components/OutlinesCard";
 
 const OutlineEditor = () => {
   const [outlines, setOutlines] = useState([]);
   const [h2InputBox, seth2InputBox] = useState(false);
   const [input, setInput] = useState("");
-  console.log(JSON.stringify(outlines));
+
+  // Fetch Data from DATA.json
+
   useEffect(() => {
     setTimeout(() => {
       const fetchData = async () => {
@@ -20,9 +22,13 @@ const OutlineEditor = () => {
       fetchData();
     }, 1000);
   }, []);
+
   if (!outlines.length > 0) {
     return <Loading />;
   }
+
+  // Drag and Drop functionality
+
   const handleDragAndDrop = (results) => {
     const { source, destination, type } = results;
 
@@ -77,10 +83,11 @@ const OutlineEditor = () => {
 
     setOutlines(newOutlines);
   };
+
   const handleH2 = (e) => {
     const data = {
       id: Date.now().toString(),
-      h2: input,
+      heading: input,
       tint: outlines.length,
     };
     if (e.keyCode == 13) {
@@ -90,6 +97,7 @@ const OutlineEditor = () => {
       setInput("");
     }
   };
+
   const handleAddH2 = () => {
     seth2InputBox((prev) => !prev);
   };
@@ -123,26 +131,14 @@ const OutlineEditor = () => {
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {outlines?.map((outline, index) => (
-                  <Draggable
-                    draggableId={outline.id}
+                  <OutlinesCard
                     index={index}
                     key={outline.id}
-                  >
-                    {(provided) => (
-                      <div
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                        className="w-full bg-white border p-2 my-4 rounded-md group "
-                      >
-                        <OutlineCard
-                          {...outline}
-                          onSetOutlines={setOutlines}
-                          onOutlines={outlines}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
+                    draggableId={outline.id}
+                    outline={outline}
+                    onSetOutlines={setOutlines}
+                    onOutlines={outlines}
+                  />
                 ))}
                 {provided.placeholder}
               </div>

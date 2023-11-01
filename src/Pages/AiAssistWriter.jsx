@@ -5,15 +5,24 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import Label from "../components/Label";
 import Option from "../components/Option";
 import { useNavigate } from "react-router-dom";
+import InputRadio from "../components/InputRadio";
 
 const AiAssistWriter = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [realTimeDataWarning, setRealTimeDataWarning] = useState(false);
   const [aiGeneratedTitleChecking, setAiGeneratedTitleChecking] =
     useState(true);
   const submit = (data) => {
     console.log(data);
+    if (data) {
+      navigate("/outline");
+    }
   };
   useEffect(() => {
     const subscription = watch(({ RealTimeData, aiGeneratedTitle }) => {
@@ -80,11 +89,19 @@ const AiAssistWriter = () => {
             <AiFillInfoCircle /> Write down your main keyword for the article
           </p>
           <input
+            placeholder="Your Main Keyword"
             type="text"
             name="mainKeyword"
             className="w-full px-4 py-4 text-gray-700 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-            {...register("mainKeyword")}
+            {...register("mainKeyword", {
+              required: "Main Keyword is required",
+            })}
           />
+          {errors.mainKeyword?.message && (
+            <small className="text-orange-700">
+              {errors.mainKeyword.message}
+            </small>
+          )}
         </div>
         <div className="flex items-center gap-3 w-full mt-6">
           <input
@@ -109,6 +126,7 @@ const AiAssistWriter = () => {
               name="mainTitle"
               className="w-full px-4 py-4 text-gray-700 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               {...register("mainTitle")}
+              placeholder="Your Main Title"
             />
           </div>
         )}
@@ -174,61 +192,18 @@ const AiAssistWriter = () => {
         </div>
         <div className="flex flex-col gap-3 mt-2 w-full">
           <Label>Number of FAQ&apos;s</Label>
-          <div className="flex gap-5 items-center">
-            <input
-              type="radio"
-              name="imageSource"
-              id="noImage"
-              value="noImage"
-              className="radio radio-primary"
-              {...register("imageSource")}
-              defaultChecked
-            />
-            <label
-              className="font-normal text-md hover:cursor-pointer"
-              htmlFor="noImage"
-            >
-              Don&apos;t Use Image
-            </label>
-          </div>
-          <div className="flex gap-5 items-center">
-            <input
-              type="radio"
-              name="imageSource"
-              id="pixabay"
-              value="pixabay"
-              className="radio radio-primary"
-              {...register("imageSource")}
-            />
-            <label
-              className="font-normal text-md hover:cursor-pointer"
-              htmlFor="pixabay"
-            >
-              Use Pixabay Image
-            </label>
-          </div>
-          <div className="flex gap-5 items-center">
-            <input
-              type="radio"
-              name="imageSource"
-              id="googleImage"
-              value="googleImage"
-              className="radio radio-primary"
-              {...register("imageSource")}
-            />
-            <label
-              className="font-normal text-md hover:cursor-pointer"
-              htmlFor="googleImage"
-            >
-              Use Google Image
-            </label>
-          </div>
+          <InputRadio id="noImage" register={register} isChecked={true}>
+            Don&apos;t Use Image
+          </InputRadio>
+          <InputRadio id="pixabay" register={register} isChecked={false}>
+            Use Pixabay Image
+          </InputRadio>
+          <InputRadio id="googleImage" register={register} isChecked={false}>
+            Use Google Image
+          </InputRadio>
         </div>
         <div className="flex w-full justify-between items-center mt-6">
-          <button
-            onClick={() => navigate("/outline")}
-            className="btn btn-lg w-full btn-primary normal-case text-white text-lg"
-          >
+          <button className="btn btn-lg w-full btn-primary normal-case text-white text-lg">
             Create Article Outline
           </button>
         </div>
