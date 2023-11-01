@@ -27,20 +27,18 @@ const OutlineCard = ({
 
     if (e.keyCode == 13) {
       if (input == "") return;
-      let findOutline = onOutlines.find((ele) => ele.id == id);
+      let newOutline = onOutlines.map((ele) => {
+        if (ele.id == id) {
+          return {
+            ...ele,
+            subHeading: ele.subHeading ? [...ele.subHeading, data] : [data],
+          };
+        }
+        return ele;
+      });
 
-      if (findOutline?.subHeading?.length > 0) {
-        let subHeading = [...findOutline.subHeading, data];
-        findOutline = { ...findOutline, subHeading };
-      }
+      onSetOutlines(newOutline);
 
-      if (!findOutline?.subHeading?.length) {
-        findOutline = { ...findOutline, subHeading: [data] };
-      }
-
-      let filteredOutline = onOutlines.filter((ele) => ele.id != id);
-      seth3InputBox((prev) => !prev);
-      onSetOutlines([...filteredOutline, findOutline]);
       setInput("");
     }
   };
@@ -52,16 +50,27 @@ const OutlineCard = ({
   };
 
   const handleDeleteH3 = (h3Id) => {
-    let findOutline = onOutlines?.find((ele) => ele.id == id);
+    // let findOutline = onOutlines?.find((ele) => ele.id == id);
+    let newOutline = onOutlines.map((ele) => {
+      if (ele.id == id) {
+        return {
+          ...ele,
+          subHeading: [
+            ...ele.subHeading.filter((outline) => outline.id != h3Id),
+          ],
+        };
+      }
+      return ele;
+    });
+    // console.log(newOutline);
+    // let editH3Outline = findOutline?.subHeading?.filter(
+    //   (outline) => outline.id != h3Id
+    // );
 
-    let editH3Outline = findOutline?.subHeading?.filter(
-      (outline) => outline.id != h3Id
-    );
+    // findOutline = { ...findOutline, subHeading: editH3Outline };
+    // let filteredOutline = onOutlines?.filter((ele) => ele.id != id);
 
-    findOutline = { ...findOutline, subHeading: editH3Outline };
-    let filteredOutline = onOutlines?.filter((ele) => ele.id != id);
-
-    onSetOutlines([...filteredOutline, findOutline]);
+    onSetOutlines(newOutline);
   };
 
   const handleDeleteH2 = () => {

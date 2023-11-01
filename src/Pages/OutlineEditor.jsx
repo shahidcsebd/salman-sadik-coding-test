@@ -23,7 +23,7 @@ const OutlineEditor = () => {
     }, 1000);
   }, []);
 
-  if (!outlines.length > 0) {
+  if (!outlines?.length > 0) {
     return <Loading />;
   }
 
@@ -140,7 +140,7 @@ const OutlineEditor = () => {
                     onOutlines={outlines}
                   />
                 ))}
-                {console.log(snapshot)}
+
                 {provided.placeholder}
               </div>
             )}
