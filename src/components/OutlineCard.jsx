@@ -73,7 +73,7 @@ const OutlineCard = ({
         <div
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className={`mb-4 ${snapshot.isDragging ? `bg-blue-200` : ``}`}
+          className={`mb-4`}
         >
           <div className="rounded-md border group-hover:border-blue-400 duration-1000">
             <h3 className="py-4 flex justify-between items-center gap-2  text-xl text-left pl-2">
@@ -89,7 +89,11 @@ const OutlineCard = ({
               </button>
             </h3>
           </div>
-          <div>
+          <div
+            className={`${
+              snapshot.isDraggingOver ? `bg-base-200 rounded-md` : ``
+            }`}
+          >
             {subHeading?.map((item, index) => (
               <Draggable draggableId={item.id} index={index} key={item.id}>
                 {(provided, snapshot) => (
@@ -97,8 +101,10 @@ const OutlineCard = ({
                     {...provided.dragHandleProps}
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    className={`my-2 ml-4 bg-white ${
-                      snapshot.isDragging ? `bg-blue-200 rounded-md` : ""
+                    className={`my-2 ml-4  ${
+                      snapshot.isDragging
+                        ? `bg-blue-200 rounded-md`
+                        : "bg-white"
                     }`}
                   >
                     <h4 className="group text-md group-hover:border-blue-400 text-left pl-4 py-4 flex justify-between s items-center gap-2 border rounded-md">

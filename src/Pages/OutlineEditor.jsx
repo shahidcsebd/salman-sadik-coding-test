@@ -128,7 +128,7 @@ const OutlineEditor = () => {
             )}
           </div>
           <Droppable droppableId="ROOT" type="group" className="w-full">
-            {(provided) => (
+            {(provided, snapshot) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {outlines?.map((outline, index) => (
                   <OutlinesCard
@@ -140,6 +140,7 @@ const OutlineEditor = () => {
                     onOutlines={outlines}
                   />
                 ))}
+                {console.log(snapshot)}
                 {provided.placeholder}
               </div>
             )}
