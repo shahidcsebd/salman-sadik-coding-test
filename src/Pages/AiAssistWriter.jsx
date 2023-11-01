@@ -4,8 +4,10 @@ import { RiRouteLine } from "react-icons/ri";
 import { AiFillInfoCircle } from "react-icons/ai";
 import Label from "../components/Label";
 import Option from "../components/Option";
+import { useNavigate } from "react-router-dom";
 
 const AiAssistWriter = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit, watch } = useForm();
   const [realTimeDataWarning, setRealTimeDataWarning] = useState(false);
   const [aiGeneratedTitleChecking, setAiGeneratedTitleChecking] =
@@ -180,7 +182,7 @@ const AiAssistWriter = () => {
               value="noImage"
               className="radio radio-primary"
               {...register("imageSource")}
-              checked
+              defaultChecked
             />
             <label
               className="font-normal text-md hover:cursor-pointer"
@@ -223,7 +225,10 @@ const AiAssistWriter = () => {
           </div>
         </div>
         <div className="flex w-full justify-between items-center mt-6">
-          <button className="btn btn-lg w-full btn-primary normal-case text-white text-lg">
+          <button
+            onClick={() => navigate("/outline")}
+            className="btn btn-lg w-full btn-primary normal-case text-white text-lg"
+          >
             Create Article Outline
           </button>
         </div>
